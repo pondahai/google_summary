@@ -1,6 +1,6 @@
 # google_summary
 Google it and make a summary
-
+2024-8-26 雖然我一開始想用google，但是google是不允許用戶爬蟲的，而且它的搜尋結果也被雜湊了，所以改用duckduckgo-search  
 ## 修改這裡程式會自動偵測並決定AI伺服器位址
 ![image](https://github.com/user-attachments/assets/5b9214b7-ad0c-43cd-a944-c5571b8119db)
 
