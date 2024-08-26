@@ -3,15 +3,19 @@ import json
 # from llama_cpp import Llama
 # from bs4 import BeautifulSoup
 
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.chrome.options import Options
 import time
+from duckduckgo_search import DDGS
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 def search_duckduckgo(query):
+    results = DDGS().text(query, max_results=5)
+    return results
+
     # 設定 Chrome 的選項
     chrome_options = Options()
     #chrome_options.add_argument("--headless")  # 啟用無頭模式（背景執行，不顯示瀏覽器）
@@ -146,12 +150,12 @@ if __name__ == "__main__":
         # 假設 result 是列表形式，需要迭代處理
         for item in result:  # 你可能需要解析 result 得到真正的項目列表
             print('--------------------')
-            print(item['text'])
+            print(item['body'])
             print('====================')
             api_url = first_response_url + "/v1/chat/completions"
 #             api_url = 'http://raspberrypi.local:1234/v1/chat/completions'
             api_key = 'your-api-key'
-            prompt = item['text'] + '\n我用少數幾句zh_TW總結這一段文字並且強調文中提到的數字'
+            prompt = item['body'] + '\n我用少數幾句zh_TW總結這一段文字並且強調文中提到的數字'
 
             for content in stream_chat_completions(api_url, api_key, prompt):
                 total += content
